@@ -29,3 +29,8 @@ $python <file-name>.py
 
 then see the magic of Flask ;)
 
+Guide Reference:
+
+https://www.codementor.io/adityamalviya/python-flask-mysql-connection-rxblpje73
+
+https://dzone.com/articles/flask-101-adding-editing-and-displaying-data
