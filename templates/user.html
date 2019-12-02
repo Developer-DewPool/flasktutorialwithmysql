@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+<head>
+        <title>DashBoard</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+            .chip {
+                display: inline-block;
+                padding: 0 25px;
+                padding-right: 0px;
+                height: 50px;
+                font-size: 16px;
+                line-height: 50px;
+                border-radius: 25px;
+                background-color: #f1f1f1;
+              }
+              
+              .chip img {
+                float: left;
+                margin: 0 10px 0 -25px;
+                height: 50px;
+                width: 50px;
+                border-radius: 50%;
+              }
+    </style>
+</head>
+
+   <body>
+        <ul class="nav navbar-nav navbar-right" style="padding-right: 50px;">
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard">PostHere</a></li>
+                {% if session['loggedin'] == True %}
+                    <li class="chip"><img src="https://www.w3schools.com/howto/img_avatar.png" alt="Person" width="96" height="96">
+                        Hello {{ name }} !
+                    </li>
+                    <li><a href="/logout">Logout</a></li>
+                {% else %}
+                  <li><a href="/login">Login </a></li>
+                {% endif %}
+                <span class=""></span>
+            </ul>
+
+        <div class="jumbotron text-center">
+            <h2>DASHBOARD</h2>
+            <p> {{ info }} </p> 
+        </div>
+   </body>
+</html>
