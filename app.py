@@ -1,6 +1,7 @@
 from flask import *
 from flask_mysqldb import MySQL
 import MySQLdb
+import re
 
 
 app = Flask(__name__)
@@ -37,7 +38,7 @@ def login():
         if account:
             # Create session data, we can access this data in other routes
             session['loggedin'] = True
-            session['id'] = account['id']
+            # session['id'] = account['id']
             session['username'] = account['username']
             user = session['username']
             # Redirect to home page
@@ -72,6 +73,36 @@ def logout():
    return redirect(url_for('login'))
 
 
+# http://localhost:5000/register - this will be the registration page, we need to use both GET and POST requests
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    # Output message if something goes wrong...
+    msg = ''
+    # Check if "username", "password" and "email" POST requests exist (user submitted form)
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and 'email' in request.form:
+        # Create variables for easy access
+        username = request.form['username']
+        passwrd = request.form['password']
+        email = request.form['email']
+        # Check if account exists using MySQL
+        
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute('SELECT * FROM MyDB.accounts WHERE username = %s AND email = %s', (username, email))
+        account = cursor.fetchone()
+        # If account exists show error and validation checks
+        if account:
+            msg = 'Account already exists!'
+        elif not re.match(r'[A-Za-z0-9]+', username):
+            msg = 'Username must contain only characters and numbers!'
+        else:
+            cursor.execute("INSERT INTO accounts(username, password, email) VALUES (%s, %s, %s)", (username, passwrd, email))
+            mysql.connection.commit()
+            msg = 'You have successfully registered!'
+            
+
+    return render_template('register.html', msg=msg)
+
+
 ## normal POST Method 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def index():
@@ -85,7 +116,7 @@ def index():
         cur.close()
         return redirect(url_for('getindex'))
     
-    return render_template('index.html')
+    return render_template('index.html', name = session['username'])
 
 ## normal json response GET Method 
 @app.route('/user', methods=['GET', 'POST'])
