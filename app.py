@@ -98,7 +98,7 @@ def register():
             cursor.execute("INSERT INTO accounts(username, password, email) VALUES (%s, %s, %s)", (username, passwrd, email))
             mysql.connection.commit()
             msg = 'You have successfully registered!'
-            
+            return redirect(url_for('login'))
 
     return render_template('register.html', msg=msg)
 
