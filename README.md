@@ -26,7 +26,6 @@ $pip install flask-mysqldb
 
 $python file-name.py
 
-
 then see the magic of Flask ;)
 
 Guide Reference:
