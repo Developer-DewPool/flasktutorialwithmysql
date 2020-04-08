@@ -1,6 +1,7 @@
 1. Create virtualenv <--- recommended
 
 $virtualenv envflask
+
 $envflask\Script\activate
 
 1st step is optional. skip the 1st part if you don't it
