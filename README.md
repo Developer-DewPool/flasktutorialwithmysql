@@ -11,10 +11,10 @@ pip install Flask
 
 3.install python MySql Libraries
 
-$pip install mysql-connector-python
-$pip install mysql-connector
-$pip install mysqlclient
-$pip install flask-mysqldb
+pip install mysql-connector-python
+pip install mysql-connector
+pip install mysqlclient
+pip install flask-mysqldb
 
 4. Run xammp or run MYSQL and create DataBase as well as Table
 
@@ -24,7 +24,7 @@ $pip install flask-mysqldb
 
 7. Run Python File from termial
 
-$python file-name.py
+python file-name.py
 
 then see the magic of Flask ;)
 
